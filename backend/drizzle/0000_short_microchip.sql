@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "plant" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" integer PRIMARY KEY NOT NULL,
 	"stage" text NOT NULL,
 	"exp" text NOT NULL,
 	"user_id" integer,
@@ -7,10 +7,11 @@ CREATE TABLE IF NOT EXISTS "plant" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "quest" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" integer PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"description" text NOT NULL,
 	"create_date" timestamp with time zone DEFAULT now() NOT NULL,
+	"end_date" timestamp with time zone NOT NULL,
 	"completed" boolean DEFAULT false,
 	"difficulty" text,
 	"category" text,
@@ -18,14 +19,14 @@ CREATE TABLE IF NOT EXISTS "quest" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "reflection" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" integer PRIMARY KEY NOT NULL,
 	"date" timestamp with time zone DEFAULT now() NOT NULL,
 	"message" text NOT NULL,
 	"quest_id" integer
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "spell" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" integer PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"description" text NOT NULL,
 	"exp" text NOT NULL,
@@ -33,7 +34,7 @@ CREATE TABLE IF NOT EXISTS "spell" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" integer PRIMARY KEY NOT NULL,
 	"username" text NOT NULL,
 	"password" text NOT NULL
 );

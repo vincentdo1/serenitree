@@ -2,14 +2,14 @@ import { relations } from 'drizzle-orm'
 import { boolean, text, pgTable, timestamp, integer } from "drizzle-orm/pg-core";
 
 export const user = pgTable('users', {
-    id: text('id')
+    id: integer('id')
         .primaryKey(),
     username: text('username').notNull(),
     password: text('password').notNull(),
 })
 
 export const quest = pgTable('quest', {
-    id: text('id')
+    id: integer('id')
         .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
@@ -22,7 +22,7 @@ export const quest = pgTable('quest', {
 })
 
 export const plant = pgTable('plant', {
-    id: text('id')
+    id: integer('id')
         .primaryKey(),
     stage: text('stage').notNull(),
     exp: text('exp').notNull(),
@@ -30,7 +30,7 @@ export const plant = pgTable('plant', {
 })
 
 export const spell = pgTable('spell', {
-    id: text('id')
+    id: integer('id')
         .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
@@ -39,7 +39,7 @@ export const spell = pgTable('spell', {
 })
 
 export const reflection = pgTable('reflection', {
-    id: text('id')
+    id: integer('id')
         .primaryKey(),
     date: timestamp('date', { withTimezone: true }).notNull().defaultNow(),
     message: text('message').notNull(),
