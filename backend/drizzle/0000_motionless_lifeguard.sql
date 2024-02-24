@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS "plant" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "quest" (
-	"id" integer PRIMARY KEY NOT NULL,
+	"id" SERIAL PRIMARY KEY,
 	"name" text NOT NULL,
 	"description" text NOT NULL,
 	"create_date" timestamp with time zone DEFAULT now() NOT NULL,

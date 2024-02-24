@@ -13,18 +13,19 @@ import { Client } from "pg";
 
 const app = new Hono()
 
-const sql = postgres({
-  host: "serenitree.c1i4kckiamtd.us-east-2.rds.amazonaws.com",
-  port: 5432,
-  user: "postgres",
-  password: "serenitree",
-  database: "serenitreedb",
-});
+// const sql = postgres({
+//   host: "serenitree.c1i4kckiamtd.us-east-2.rds.amazonaws.com",
+//   port: 5432,
+//   user: "postgres",
+//   password: "serenitree",
+//   database: "serenitreedb",
+// });
 
-const db = drizzle(sql);
-await migrate(db, { migrationsFolder: 'drizzle' });
+// const db = drizzle(sql);
 
-app.get('/', (c) => c.text('Hello Node.js!'))
+// await migrate(db, { migrationsFolder: 'drizzle' });
+
+app.get('/', async (c) => c.text('Hello Node.js!'))
 
 const routes = app.route('/api/user', user).route('/api/plant', plant).route('/api/spell', spell).route('/api/reflection', reflection).route('/api/quest', quest)
 
