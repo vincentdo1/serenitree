@@ -14,6 +14,7 @@ export const quest = pgTable('quest', {
     name: text('name').notNull(),
     description: text('description').notNull(),
     createDate: timestamp('create_date', { withTimezone: true }).notNull().defaultNow(),
+    endDate: timestamp('end_date', { withTimezone: true }).notNull(),
     completed: boolean('completed').default(false),
     difficulty: text('difficulty'),
     category: text('category'),
