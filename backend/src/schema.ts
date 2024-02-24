@@ -63,9 +63,11 @@ export const plantRelation = relations(plant, ({ one }) => ({
     user: one(user),
 }))
 
-export const questRelation = relations(quest, ({ many }) => ({
+export const questRelation = relations(quest, ({ one, many }) => ({
     user: many(user),
-    reflect: many(reflection)
+    reflect: many(reflection),
+    // one to one
+    spell: one(spell)
 }))
 
 export const reflectionRelation = relations(reflection, ({ one }) => ({
