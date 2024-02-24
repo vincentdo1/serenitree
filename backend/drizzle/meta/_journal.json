@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1708791062634,
+      "tag": "0000_ordinary_mongu",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1708793007092,
+      "tag": "0001_daffy_frank_castle",
+      "breakpoints": true
+    }
+  ]
+}

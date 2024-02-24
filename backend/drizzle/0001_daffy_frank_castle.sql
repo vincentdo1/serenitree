@@ -1,0 +1,1 @@
+ALTER TABLE "quest" ADD COLUMN "end_date" timestamp with time zone NOT NULL;
