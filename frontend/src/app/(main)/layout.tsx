@@ -96,37 +96,42 @@ export default function MainLayout({
                     Home
                     <div className="tooltip-arrow" data-popper-arrow></div>
                 </div>
-                <button data-tooltip-target="tooltip-wallet" type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                    <svg className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M11.074 4 8.442.408A.95.95 0 0 0 7.014.254L2.926 4h8.148ZM9 13v-1a4 4 0 0 1 4-4h6V6a1 1 0 0 0-1-1H1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1v-2h-6a4 4 0 0 1-4-4Z"/>
-                        <path d="M19 10h-6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1Zm-4.5 3.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM12.62 4h2.78L12.539.41a1.086 1.086 0 1 0-1.7 1.352L12.62 4Z"/>
+                <button data-tooltip-target="tooltip-quest" type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
                     </svg>
-                    <span className="sr-only">Wallet</span>
+
+                    <span className="sr-only">Quest</span>
                 </button>
-                <div id="tooltip-wallet" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Wallet
+                <div id="tooltip-quest" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Quest
                     <div className="tooltip-arrow" data-popper-arrow></div>
                 </div>
-                <div className="flex items-center justify-center">
-                    <button data-tooltip-target="tooltip-new" type="button" className="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
-                        <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16"/>
-                        </svg>
-                        <span className="sr-only">New item</span>
-                    </button>
-                </div>
+                              <div className="flex items-center justify-center">
+                                <button data-tooltip-target="tooltip-new" type="button" className="inline-flex items-center justify-center w-10 h-10 font-medium bg-white rounded-full hover:bg-green-700 group focus:ring-4 focus:ring-green-300 focus:outline-none dark:focus:ring-green-800" style={{ color: '#008000' }}>
+                                  
+                                
+                            
+
+                          
+                      <svg width="512" height="512" viewBox="0 0 512 512" style={{ color: '#E84A27' }} xmlns="http://www.w3.org/2000/svg" className="h-full w-full"><rect width="512" height="512" x="0" y="0" rx="30" fill="transparent" stroke="transparent" strokeWidth="0" strokeOpacity="100%" paintOrder="stroke"></rect><svg width="400px" height="400px" viewBox="0 0 128 128" fill="#E84A27" x="56" y="56" role="img" style={{ display: 'inline-block', verticalAlign: 'middle' }} xmlns="http://www.w3.org/2000/svg"><g fill="#E84A27"><path fill="#855c52" d="M72.06 115.62c-.91-4.71-.99-9.52-1.47-14.29c-.07-.63-.15-1.25-.16-1.88c-.03-1.33-.7-2.21-1.94-2.69c-.64-.25-1.47-.22-2.15-.33c-.73-.12-1.43-.17-2.17-.15c-.07 0-.13.01-.19.02a.99.99 0 0 0-.18-.02c-.75-.02-1.44.03-2.18.15c-.68.11-1.5.07-2.14.33c-1.24.49-1.91 1.36-1.93 2.69c-.02.63-.09 1.25-.16 1.88c-.48 4.76-.56 9.58-1.47 14.29c-.73 3.86-5.35 10.09.84 11.5c4.61 1.04 9.82 1.05 14.43 0c6.22-1.41 1.61-7.64.87-11.5z"/><path fill="#757f3f" d="M120.56 68.48c0-5.76-3.47-10.71-8.42-12.9c2.86-2.49 4.67-6.14 4.67-10.22c0-7.42-5.96-13.43-13.35-13.54c.87-1.69 1.4-3.57 1.4-5.6c0-6.82-5.53-12.36-12.36-12.36c-1.19 0-2.32.22-3.41.54c-.14-6.38-5.33-11.51-11.73-11.51c-2.77 0-5.28.99-7.28 2.59C67.98 2.25 64.36.1 60.22.1c-4.18 0-7.83 2.19-9.91 5.48c-1.68-.92-3.58-1.49-5.63-1.49c-6.5 0-11.77 5.27-11.77 11.77c0 1.02.18 1.99.42 2.93c-.47-.06-.92-.14-1.4-.14c-6.83 0-12.36 5.54-12.36 12.36c0 1.86.44 3.61 1.18 5.19c-5.93 1.45-10.34 6.78-10.34 13.15c0 3.69 1.49 7.03 3.88 9.47c-4.08 2.48-6.82 6.94-6.82 12.06c0 6.09 3.88 11.27 9.3 13.24c-1 2.02-1.58 4.29-1.58 6.69c0 8.37 6.78 15.15 15.15 15.15c2.9 0 5.6-.83 7.91-2.25c2.26 5.53 7.69 9.43 14.02 9.43c4.43 0 8.41-1.92 11.18-4.95c2.78 3.27 6.92 5.35 11.54 5.35c6.98 0 12.84-4.73 14.59-11.15a15.07 15.07 0 0 0 8.13 2.38c8.36 0 15.15-6.78 15.15-15.15c0-2.81-.78-5.43-2.11-7.69c5.67-1.82 9.81-7.15 9.81-13.45z"/><path fill="#bdcf46" d="M31.14 59.78c-3.06.26-4.47-1.92-4.44-4.69c.04-3.17 1.88-6.55 4.39-8.49c.84-.65 1.92-1.09 2.46-2.05c.56-.99.17-2.24.21-3.31c.07-1.87.48-3.72 1.29-5.41c1.22-2.56 3.59-5.06 6.43-5.89c1.88-.54 2.4-2.01 2.71-3.76c.85-4.7 4.79-8.29 9.51-8.91c.63-.08 1.26-.1 1.9-.1c2.76 0 5.64 1.22 5.66 4.39c.04 5.35-6.47 3.19-8.62 6.56c-.43.67-.47 1.37-.64 2.12c-.39 1.68-.28 3.57-1.34 5.02c-1.17 1.58-3.11 1.8-4.62 2.87c-1.54 1.09-2.56 2.85-3 4.67c-.53 2.22-.08 4.65-1.18 6.73c-1.07 2-3.11 2.55-4.88 3.72c-1.07.71-1.61 1.81-1.99 3c-.57 1.81-1.28 2.96-3.25 3.42c-.21.06-.41.1-.6.11z"/></g></svg></svg>
+
+                
+                                  <span className="sr-only">New item</span>
+                                </button>
+                              </div>
                 <div id="tooltip-new" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                     Create new item
                     <div className="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <button data-tooltip-target="tooltip-settings" type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                    <svg className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"/>
-                    </svg>
-                    <span className="sr-only">Settings</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                </svg>
+                    <span className="sr-only">Archive</span>
                 </button>
                 <div id="tooltip-settings" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Settings
+                    Archive
                     <div className="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <button data-tooltip-target="tooltip-profile" type="button" className="inline-flex flex-col items-center justify-center px-5 rounded-e-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
