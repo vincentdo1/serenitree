@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { boolean, text, pgTable, timestamp, integer } from "drizzle-orm/pg-core";
+import { boolean, numeric, text, pgTable, timestamp, integer } from "drizzle-orm/pg-core";
 
 export const user = pgTable('users', {
     id: integer('id')
@@ -25,7 +25,7 @@ export const plant = pgTable('plant', {
     id: integer('id')
         .primaryKey(),
     stage: text('stage').notNull(),
-    exp: text('exp').notNull(),
+    exp: numeric('exp').notNull(),
     userId: integer("user_id").references(() => user.id).unique()
 })
 
@@ -34,7 +34,7 @@ export const spell = pgTable('spell', {
         .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
-    exp: text('exp').notNull(),
+    exp: numeric('exp').notNull(),
     questId: integer("quest_id").references(() => quest.id)
 })
 
