@@ -9,19 +9,28 @@ import connectDB from '../utils/connectDB';
 const app = new Hono()
 
 app.get('/:userId', connectDB, async (c) => {
-  const param = await c.req.param('userId')
-
-  console.log(param)
-
-  return c.json(await c.get('db').select().from(user).where(eq(user.id, param)).execute());
+    const param = c.req.param('userId')
+    console.log(param)
+    return c.json(await c.get('db').select().from(user).where(eq(user.id, param)).execute());
 });
 
 app.post('/', connectDB, async (c) => {
-  const body = await c.req.json()
+    const body = await c.req.json()
+    console.log(body)
+    return c.json(await c.get('db').insert(user).values({...body}).returning());
+});
 
-  console.log(body)
+app.put('/:userId', connectDB, async (c) => {
+    const param = c.req.param('userId')
+    const body = await c.req.json()
+    console.log(body)
+    return c.json(await c.get('db').update(user).set({ ...body}).where(eq(user.id, param)).returning());
+});
 
-  return c.json(await c.get('db').insert(user).values({...body}).returning());
+app.delete('/:userId', connectDB, async (c) => {
+    const param = c.req.param('userId')
+    console.log(param)
+    return c.json(await c.get('db').delete(user).where(eq(user.id, param)).execute());
 });
 
 export default app
