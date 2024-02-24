@@ -9,6 +9,7 @@ import connectDB from '../utils/connectDB';
 const app = new Hono()
 
 app.get('/:userId', connectDB, async (c) => {
+  // Changed to userId
   const param = c.req.param('userId')
   console.log(param)
   return c.json(await c.get('db').select().from(plant).where(eq(plant.userId, param)).execute());
