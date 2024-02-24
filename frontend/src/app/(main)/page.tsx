@@ -89,7 +89,7 @@ export default async function Home() {
   let episodes = await getAllEpisodes()
 
   return (
-    <div className="pb-6 pt-6 sm:pb-4 lg:pt-12">
+    <div className="max-w-sm pb-6 pt-6 sm:pb-4 lg:pt-12">
 
       <Container>
         {/* Profile Picture */}
@@ -105,6 +105,25 @@ export default async function Home() {
           Quests
         </h1> */}
       </Container>
+
+      <div className="p-6 my-5 mx-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="inline-flex space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd" />
+          </svg>
+          <p>Feb 18 - Feb 24</p>
+        </div>
+          <a href="#">
+              <h5 className="my-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Your weekly recap is here!</h5>
+          </a>
+          <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">See your progress and celebrate the goals you've achieved this week. Great work!</p>
+          <a href="#" className="inline-flex font-medium items-center text-blue-600 hover:underline">
+              See your recap
+              <svg className="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
+              </svg>
+          </a>
+      </div>
 
 
 
