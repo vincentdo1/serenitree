@@ -23,12 +23,8 @@ app.post('/', connectDB, async (c) => {
 app.put('/:userId', connectDB, async (c) => {
     const param = c.req.param('userId')
     const body = await c.req.json()
-    console.log(param)
     console.log(body)
-    const updateQuery = c.get('db').update(user).set(updatedUserData).where(eq(user.id, userId));
-    const result = await updateQuery.execute();
-    return result;
-    // return c.json(await c.get('db').update(user).set(updatedUserData).where(eq(user.id, userId)).execute());
+    return c.json(await c.get('db').update(user).set({ ...body}).where(eq(user.id, param)).returning());
 });
 
 app.delete('/:userId', connectDB, async (c) => {
