@@ -89,7 +89,7 @@ export default async function Home() {
   let episodes = await getAllEpisodes()
 
   return (
-    <div className="max-w-sm pb-6 pt-6 sm:pb-4 lg:pt-12">
+    <div className="bg-white max-w-sm pb-6 pt-6 sm:pb-4 lg:pt-12">
       <Container>
         {/* Profile Picture */}
         <div className=" flex items-center gap-4">
@@ -105,9 +105,7 @@ export default async function Home() {
             </div>
         </div>
 
-        {/* <h1 className="text-2xl font-bold leading-7 text-slate-900">
-          Quests
-        </h1> */}
+
       </Container>
 
 
@@ -132,33 +130,7 @@ export default async function Home() {
             </a>
         </div>
 
-        <div className="inline-flex space-x-4 max-w-xs overflow-x-auto">
-          
-          <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <a href="#">
-                  <h5 className="my-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Reflect</h5>
-              </a>
-              <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">See your progress</p>
-
-          </div>
-
-          <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <a href="#">
-                  <h5 className="my-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Reflect</h5>
-              </a>
-              <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">Celebrate the goals!</p>
-
-          </div>
-
-          <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <a href="#">
-                  <h5 className="my-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Reflect</h5>
-              </a>
-              <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">Celebrate the goals!</p>
-
-          </div>
-        </div>
-
+        
         <div className="pt-4 pb-1 px-0 mx-auto max-w-screen-xl text-center lg:py-16">
         {/* <h1 className="my-3 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Parseltongue, Jese!</h1> */}
         <div className="flex flex-col sm:flex-row sm:justify-center sm:space-y-0">
@@ -172,7 +144,24 @@ export default async function Home() {
         <p className="my-2 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Back from your quest? Let's reflect.</p>
         
       </div>
+
+      <div className="pt-4 pb-1 px-0 mx-auto max-w-screen-xl text-center lg:py-16">
+        {/* <h1 className="my-3 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Parseltongue, Jese!</h1> */}
+        <div className="flex flex-col sm:flex-row sm:justify-center sm:space-y-0">
+        <Link className="inline-flex justify-center items-center py-3 px-8 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900" href='/create'>
+                Create
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="mx-2 w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+            </svg>
+            </Link>
+        </div>
+        <p className="my-2 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Back from your quest? Let's reflect.</p>
         
+      </div>
+
+
+
+      
       </div>
     </div>
   )
