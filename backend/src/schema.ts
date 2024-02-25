@@ -1,14 +1,17 @@
 import { relations } from 'drizzle-orm'
-import { boolean, serial, numeric, text, pgTable, timestamp, integer } from "drizzle-orm/pg-core";
+import { createId } from '@paralleldrive/cuid2'
+import { boolean, serial, numeric, text, pgTable, timestamp } from "drizzle-orm/pg-core";
 
 export const user = pgTable('users', {
-    id: serial('id').primaryKey(),
+    id: serial('id')
+        .primaryKey(),
     username: text('username').notNull(),
     password: text('password').notNull(),
 })
 
 export const quest = pgTable('quest', {
-    id: serial('id').primaryKey(),
+    id: serial('id')
+        .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
     createDate: timestamp('create_date', { withTimezone: true }).notNull().defaultNow(),
@@ -16,29 +19,32 @@ export const quest = pgTable('quest', {
     completed: boolean('completed').default(false),
     difficulty: text('difficulty'),
     category: text('category'),
-    userId: integer("user_id").references(() => user.id)
+    userId: serial("user_id").references(() => user.id)
 })
 
 export const plant = pgTable('plant', {
-    id: serial('id').primaryKey(),
+    id: serial('id')
+        .primaryKey(),
     stage: text('stage').notNull(),
     exp: numeric('exp').notNull(),
-    userId: integer("user_id").references(() => user.id).unique()
+    userId: serial("user_id").references(() => user.id).unique()
 })
 
 export const spell = pgTable('spell', {
-    id: serial('id').primaryKey(),
+    id: serial('id')
+        .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
     exp: numeric('exp').notNull(),
-    questId: integer("quest_id").references(() => quest.id)
+    questId: serial("quest_id").references(() => quest.id)
 })
 
 export const reflection = pgTable('reflection', {
-    id: serial('id').primaryKey(),
+    id: serial('id')
+        .primaryKey(),
     date: timestamp('date', { withTimezone: true }).notNull().defaultNow(),
     message: text('message').notNull(),
-    questId: integer("quest_id").references(() => quest.id)
+    questId: serial("quest_id").references(() => quest.id)
 })
 
 
@@ -51,7 +57,7 @@ export const userRelation = relations(user, ({ one, many}) => ({
 }))
 
 export const spellRelation = relations(spell, ({ one }) => ({
-    quest: one(quest),
+    quest: one(quest),  
 }))
 
 export const plantRelation = relations(plant, ({ one }) => ({

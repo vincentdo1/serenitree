@@ -1,5 +1,5 @@
 {
-  "id": "e790c541-6ddf-4a38-ac99-c5de79b6888b",
+  "id": "c3244e3d-6a80-4977-9690-efea030aba26",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -28,9 +28,9 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -116,9 +116,9 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -165,9 +165,9 @@
         },
         "quest_id": {
           "name": "quest_id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -219,9 +219,9 @@
         },
         "quest_id": {
           "name": "quest_id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
