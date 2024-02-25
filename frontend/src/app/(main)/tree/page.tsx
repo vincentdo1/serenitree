@@ -50,19 +50,20 @@ export default function Home() {
         return seedlingImage; // Default image if stage is unknown
     }
   };
+  
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen backgroundImageStyle">
       <div className="flex flex-col justify-center items-center min-h-screen">
         {/* Displaying Stage and Exp */}
         <div className="text-center mb-4">
-          <p className="text-lg font-semibold">Stage: {stage}</p>
-          <p className="text-lg font-semibold">Exp: {exp}</p>
+        <p className="text-2xl font-bold text-gray-800" style={{ fontFamily: 'MedievalSharp, cursive' }}>Stage: {stage}</p>
+        <p className="text-2xl font-bold text-gray-800" style={{ fontFamily: 'MedievalSharp, cursive' }}>Exp: {exp}</p>
         </div>
         {/* Wrap Image in a div and apply the animation class */}
         <div className="breathing-animation">
-          <Image src={getImageForStage(stage)} alt="Tree" layout="fixed" />
-          </div>
+          <Image src={getImageForStage(stage)} alt="Tree" layout="fixed" width={200} height={200} />
+        </div>
       </div>
     </div>
   );
