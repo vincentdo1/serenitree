@@ -9,7 +9,7 @@ export default function DisplayQuests() {
   useEffect(() => {
     async function fetchQuests() {
       try {
-        const response = await axios.get('http://localhost:3000/api/quest/1'); // Assuming this endpoint returns an array of quests
+        const response = await axios.get('http://localhost:3000/api/quest/oawc80umu1bp73anu8780njk'); // Assuming this endpoint returns an array of quests
         console.log('API Response:', response.data);
         setQuests(response.data); // Ensure this is an array of quests
       } catch (error) {
