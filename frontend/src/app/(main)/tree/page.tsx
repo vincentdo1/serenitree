@@ -57,6 +57,13 @@ export default function Home() {
       <div className="text-center mb-4">
         <p className="text-lg font-semibold">Stage: {stage}</p>
         <p className="text-lg font-semibold">Exp: {exp}</p>
+<<<<<<< HEAD
+=======
+      </div>
+      {/* Wrap Image in a div and apply the animation class */}
+      <div className="breathing-animation">
+        <Image src={getImageForStage(stage)} alt="Tree" layout="fixed" />
+>>>>>>> 7de30dc (breathing trees)
       </div>
       {/* Wrap Image in a div and apply the animation class */}
       <div className="breathing-animation">
