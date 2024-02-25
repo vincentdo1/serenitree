@@ -1,13 +1,13 @@
 CREATE TABLE IF NOT EXISTS "plant" (
-	"id" integer PRIMARY KEY NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"stage" text NOT NULL,
-	"exp" text NOT NULL,
+	"exp" numeric NOT NULL,
 	"user_id" integer,
 	CONSTRAINT "plant_user_id_unique" UNIQUE("user_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "quest" (
-	"id" SERIAL PRIMARY KEY,
+	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"description" text NOT NULL,
 	"create_date" timestamp with time zone DEFAULT now() NOT NULL,
@@ -19,22 +19,22 @@ CREATE TABLE IF NOT EXISTS "quest" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "reflection" (
-	"id" integer PRIMARY KEY NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"date" timestamp with time zone DEFAULT now() NOT NULL,
 	"message" text NOT NULL,
 	"quest_id" integer
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "spell" (
-	"id" integer PRIMARY KEY NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"description" text NOT NULL,
-	"exp" text NOT NULL,
+	"exp" numeric NOT NULL,
 	"quest_id" integer
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
-	"id" integer PRIMARY KEY NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"username" text NOT NULL,
 	"password" text NOT NULL
 );
