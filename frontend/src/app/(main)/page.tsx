@@ -99,9 +99,9 @@ export default async function Home() {
                 <div className="flex justify-between mb-1">
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '45%' }}></div>
+          <div className="bg-emerald-600 h-2.5 rounded-full" style={{ width: '45%' }}></div>
         </div>
-          <span className="text-sm font-medium text-blue-700 dark:text-white">Level 5  - 125 XP</span>
+          <span className="text-sm font-medium text-emerald-700 dark:text-white">Level 5  - 125 XP</span>
             </div>
         </div>
 
@@ -124,7 +124,7 @@ export default async function Home() {
                 <h5 className="my-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Your weekly recap is here!</h5>
             </a>
             <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">See your progress and celebrate the goals you've achieved this week. Great work!</p>
-            <a href="#" className="inline-flex font-medium items-center text-blue-600 hover:underline">
+            <a href="#" className="inline-flex font-medium items-center text-gray-600 hover:underline">
                 See your recap
                 <svg className="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
@@ -132,11 +132,47 @@ export default async function Home() {
             </a>
         </div>
 
-        <div className="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
-          {episodes.map((episode) => (
-            <EpisodeEntry key={episode.id} episode={episode} />
-          ))}
+        <div className="inline-flex space-x-4 max-w-xs overflow-x-auto">
+          
+          <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <a href="#">
+                  <h5 className="my-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Reflect</h5>
+              </a>
+              <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">See your progress</p>
+
+          </div>
+
+          <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <a href="#">
+                  <h5 className="my-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Reflect</h5>
+              </a>
+              <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">Celebrate the goals!</p>
+
+          </div>
+
+          <div className="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <a href="#">
+                  <h5 className="my-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Reflect</h5>
+              </a>
+              <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">Celebrate the goals!</p>
+
+          </div>
         </div>
+
+        <div className="pt-4 pb-1 px-0 mx-auto max-w-screen-xl text-center lg:py-16">
+        {/* <h1 className="my-3 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Parseltongue, Jese!</h1> */}
+        <div className="flex flex-col sm:flex-row sm:justify-center sm:space-y-0">
+            <a href="#" className="inline-flex justify-center items-center py-3 px-8 text-base font-medium text-center text-white rounded-lg bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-300 dark:focus:ring-emerald-900">
+                Reflect
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="mx-2 w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+            </svg>
+            </a>
+        </div>
+        <p className="my-2 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Back from your quest? Let's reflect.</p>
+        
+      </div>
+        
       </div>
     </div>
   )
