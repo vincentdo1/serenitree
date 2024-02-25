@@ -56,9 +56,9 @@ export default function DisplayTextBox() {
                 <div className="flex justify-between mb-1">
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div className="bg-emerald-600 h-2.5 rounded-full" style={{ width: '45%' }}></div>
+          <div className="bg-green-600 h-2.5 rounded-full" style={{ width: '45%' }}></div>
         </div>
-          <span className="text-sm font-medium text-emerald-700 dark:text-white">Level 5  - 125 XP</span>
+          <span className="text-sm font-medium text-green-700 dark:text-white">Level 5  - 125 XP</span>
             </div>
         </div>
 
@@ -133,7 +133,7 @@ export default function DisplayTextBox() {
           </div>
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
           >
             Create
           </button>

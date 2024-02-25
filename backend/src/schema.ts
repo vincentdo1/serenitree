@@ -1,16 +1,19 @@
 import { relations } from 'drizzle-orm'
-import { boolean, numeric, text, pgTable, timestamp, integer } from "drizzle-orm/pg-core";
+import { createId } from '@paralleldrive/cuid2'
+import { boolean, numeric, text, pgTable, timestamp, integer, serial } from "drizzle-orm/pg-core";
 
 export const user = pgTable('users', {
-    id: integer('id')
-        .primaryKey(),
+    id: text('id')
+      .$defaultFn(() => createId())
+      .primaryKey(),
     username: text('username').notNull(),
     password: text('password').notNull(),
 })
 
 export const quest = pgTable('quest', {
-    id: integer('id')
-        .primaryKey(),
+    id: text('id')
+      .$defaultFn(() => createId())
+      .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
     createDate: timestamp('create_date', { withTimezone: true }).notNull().defaultNow(),
@@ -18,34 +21,37 @@ export const quest = pgTable('quest', {
     completed: boolean('completed').default(false),
     difficulty: text('difficulty'),
     category: text('category'),
-    userId: integer("user_id").references(() => user.id)
-})
+    userId: text("user_id")
+        .references(() => user.id) 
+});
 
 export const plant = pgTable('plant', {
-    id: integer('id')
-        .primaryKey(),
+    id: text('id')
+      .$defaultFn(() => createId())
+      .primaryKey(),
     stage: text('stage').notNull(),
     exp: numeric('exp').notNull(),
-    userId: integer("user_id").references(() => user.id).unique()
+    userId: text("user_id").references(() => user.id).unique()
 })
 
 export const spell = pgTable('spell', {
-    id: integer('id')
+    id: text('id')
+        .$defaultFn(() => createId())
         .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
     exp: numeric('exp').notNull(),
-    questId: integer("quest_id").references(() => quest.id)
+    questId: text("quest_id").references(() => quest.id)
 })
 
 export const reflection = pgTable('reflection', {
-    id: integer('id')
+    id: text('id')
+        .$defaultFn(() => createId())
         .primaryKey(),
     date: timestamp('date', { withTimezone: true }).notNull().defaultNow(),
     message: text('message').notNull(),
-    questId: integer("quest_id").references(() => quest.id)
+    questId: text("quest_id").references(() => quest.id)
 })
-
 
 export const userRelation = relations(user, ({ one, many}) => ({
     quest: many(quest),
@@ -76,4 +82,3 @@ export const reflectionRelation = relations(reflection, ({ one }) => ({
         references: [quest.id],
       }),
 }))
-
