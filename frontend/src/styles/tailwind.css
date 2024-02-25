@@ -15,3 +15,8 @@
     animation: breathe 2s ease-in-out infinite;
   }
   
+  .backgroundImageStyle {
+    background-image: url('../images/background.gif'); /* Adjust the path as needed */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the background image */
+  }
