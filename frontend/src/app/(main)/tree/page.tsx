@@ -25,6 +25,7 @@ export default function Home() {
         setStage(data.stage);
         setExp(data.exp);
         setUserId(data.userId);
+        await updateExp(data.userId, parseInt(data.exp, 10) + 50);
       } catch (error) {
         console.error('API Error:', error);
       }
@@ -32,6 +33,31 @@ export default function Home() {
 
     fetchData();
   }, []);
+
+  const updateExp = async (userId, newExp) => {
+    try {
+      let treeType = 'Seedling'
+      if (newExp > 200) {
+        treeType = 'Sapling'
+      } else if (newExp > 250) {
+        treeType = 'Mid'
+      } else if (newExp > 250) {
+        treeType = 'Mature'
+      } else if (newExp > 300) {
+        treeType = 'Old'
+      }
+      const response = await axios.put('http://localhost:3000/api/plant/oawc80umu1bp73anu8780njk', {
+        exp: newExp,
+        stage: treeType,
+      });
+      setStage(treeType)
+      console.log('Update Response:', response.data);
+      // Optionally, update the local state if needed
+      setExp(newExp);
+    } catch (error) {
+      console.error('Update Error:', error);
+    }
+  };
 
   // Function to determine which tree image to display
   const getImageForStage = (stage) => {
