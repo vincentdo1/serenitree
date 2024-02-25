@@ -18,13 +18,12 @@ export default function DisplayTextBox() {
 
     try {
       const response = await axios.post('http://localhost:3000/api/quest', {
-        id: 3,
         name: quest,
         description: description,
         endDate: startDate,
         category: category,
         difficulty: difficulty,
-        userId: 1
+        userId: "oawc80umu1bp73anu8780njk"
       });
 
       // Handle response data as needed
