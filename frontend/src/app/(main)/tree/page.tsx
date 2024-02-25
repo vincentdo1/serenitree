@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/plant/1');
+        const response = await axios.get('http://localhost:3000/api/plant/oawc80umu1bp73anu8780njk');
         console.log('API Response:', response.data[0]); // Assuming the response is an array and you're interested in the first item
         const data = response.data[0]; // Adjust according to actual response structure
 
