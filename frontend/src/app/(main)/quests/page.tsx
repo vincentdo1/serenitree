@@ -4,67 +4,38 @@ import { Container } from '@/components/Container'
 import { EpisodePlayButton } from '@/components/EpisodePlayButton'
 import { FormattedDate } from '@/components/FormattedDate'
 import { type Episode, getAllEpisodes } from '@/lib/episodes'
+import { type Quest, getAllQuests } from '@/lib/quests'
 
-function PauseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 10 10" {...props}>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M1.496 0a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H2.68a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5H1.496Zm5.82 0a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H8.5a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5H7.316Z"
-      />
-    </svg>
-  )
-}
-
-function PlayIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 10 10" {...props}>
-      <path d="M8.25 4.567a.5.5 0 0 1 0 .866l-7.5 4.33A.5.5 0 0 1 0 9.33V.67A.5.5 0 0 1 .75.237l7.5 4.33Z" />
-    </svg>
-  )
-}
-
-function EpisodeEntry({ episode }: { episode: Episode }) {
-  let date = new Date(episode.published)
+function QuestEntry({ quest }: { quest: Quest }) {
+  let date = new Date(quest.createDate)
+  console.log("quest:", quest);
 
   return (
     <article
-      aria-labelledby={`episode-${episode.id}-title`}
+      aria-labelledby={`episode-${1}-title`}
       className="py-10 sm:py-12"
     >
       <Container>
         <div className="flex flex-col items-start">
           <h2
-            id={`episode-${episode.id}-title`}
+            id={`episode-${1}-title`}
             className="mt-2 text-lg font-bold text-slate-900"
           >
-            <Link href={`episodes/${episode.id}`}>{episode.title}</Link>
+            <Link href={{
+              pathname: '/quests/${1}',
+              query: {
+                id: '1'
+              }
+            }}>{quest.name}</Link>
           </h2>
           <FormattedDate
             date={date}
             className="order-first font-mono text-sm leading-7 text-slate-500"
           />
           <p className="mt-1 text-base leading-7 text-slate-700">
-            {episode.description}
+            {quest.description}
           </p>
           <div className="mt-4 flex items-center gap-4">
-            <EpisodePlayButton
-              episode={episode}
-              className="flex items-center gap-x-3 text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900"
-              playing={
-                <>
-                  <PauseIcon className="h-2.5 w-2.5 fill-current" />
-                  <span aria-hidden="true">Reflect</span>
-                </>
-              }
-              paused={
-                <>
-                  <PlayIcon className="h-2.5 w-2.5 fill-current" />
-                  <span aria-hidden="true">Reflect</span>
-                </>
-              }
-            />
             <span
               aria-hidden="true"
               className="text-sm font-bold text-slate-400"
@@ -72,9 +43,9 @@ function EpisodeEntry({ episode }: { episode: Episode }) {
               /
             </span>
             <Link
-              href={`/${episode.id}`}
+              href={`quests/${1}`}
               className="flex items-center text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900"
-              aria-label={`Show notes for episode ${episode.title}`}
+              aria-label={`Show notes for episode ${quest.name}`}
             >
               Show notes
             </Link>
@@ -86,7 +57,8 @@ function EpisodeEntry({ episode }: { episode: Episode }) {
 }
 
 export default async function Home() {
-  let episodes = await getAllEpisodes()
+  let quests = await getAllQuests('1')
+  // console.log(quests);
 
   return (
     <div className="pb-6 pt-6 sm:pb-4 lg:pt-12">
@@ -109,8 +81,8 @@ export default async function Home() {
 
 
       <div className="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
-        {episodes.map((episode) => (
-          <EpisodeEntry key={episode.id} episode={episode} />
+        {quests.map((quest: Quest) => (
+          <QuestEntry key={1} quest={quest} />
         ))}
       </div>
     </div>
