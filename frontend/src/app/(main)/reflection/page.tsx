@@ -17,7 +17,7 @@ export default function DisplayTextBox() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/quest', {
+      const response = await axios.post('http://localhost:3000/api/reflection', {
         id: 3,
         name: quest,
         description: description,

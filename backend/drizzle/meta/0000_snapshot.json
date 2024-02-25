@@ -1,5 +1,5 @@
 {
-  "id": "ab9dc8dd-21a2-4065-9b65-86b1ccc34d62",
+  "id": "9fcbbc57-c55c-4d94-a66f-1de5c9bfc36d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -22,7 +22,7 @@
         },
         "exp": {
           "name": "exp",
-          "type": "text",
+          "type": "numeric",
           "primaryKey": false,
           "notNull": true
         },
@@ -213,7 +213,7 @@
         },
         "exp": {
           "name": "exp",
-          "type": "text",
+          "type": "numeric",
           "primaryKey": false,
           "notNull": true
         },
