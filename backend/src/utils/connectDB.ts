@@ -8,7 +8,7 @@ const dbConfig = {
     host: "serenitree.c1i4kckiamtd.us-east-2.rds.amazonaws.com",
     port: 5432,
     user: "postgres",
-    password: "serenitree",
+    password: "$Serenithree370",
     database: "serenitreedb",
   };
 

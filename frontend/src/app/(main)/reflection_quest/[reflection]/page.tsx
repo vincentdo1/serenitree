@@ -22,7 +22,6 @@ export default function PostReflectionBox(id) {
     try {
       // Perform the POST request on submit
       const response = await axios.post('http://localhost:3000/api/reflection', {
-        id: "3", // TODO: if time, find way to autoincrement :(
         questId: id.params.reflection, // Assuming 'id' is the reflection ID you want to send
         message: description,
       });
