@@ -9,6 +9,8 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
 import { Client } from "pg";
+import { cors } from 'hono/cors'
+
 
 
 const app = new Hono()
@@ -24,6 +26,18 @@ const app = new Hono()
 // const db = drizzle(sql);
 
 // await migrate(db, { migrationsFolder: 'drizzle' });
+app.use('/api/*', cors())
+app.use(
+  '/api2/*',
+  cors({
+    origin: 'http://localhost:4000',
+    allowHeaders: ['X-Custom-Header', 'Upgrade-Insecure-Requests'],
+    allowMethods: ['POST', 'GET', 'OPTIONS'],
+    exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
+    maxAge: 600,
+    credentials: true,
+  })
+)
 
 app.get('/', async (c) => c.text('Hello Node.js!'))
 
