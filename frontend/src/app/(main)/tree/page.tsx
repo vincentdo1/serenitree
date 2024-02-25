@@ -1,123 +1,67 @@
-import Link from 'next/link'
+"use client"
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+// Import images for each stage
+import seedlingImage from '../../../images/tree1.png'; // Adjust the path as needed
+import saplingImage from '../../../images/tree2.png'; // Adjust the path as needed
+import midImage from '../../../images/tree3.png'; // Adjust the path as needed
+import matureImage from '../../../images/tree4.png'; // Adjust the path as needed
+import oldImage from '../../../images/tree5.png'; // Adjust the path as needed
 
-import { Container } from '@/components/Container'
-import Image from 'next/image'
-import { EpisodePlayButton } from '@/components/EpisodePlayButton'
-import { FormattedDate } from '@/components/FormattedDate'
-import { type Episode, getAllEpisodes } from '@/lib/episodes'
-import tree1 from '../../../images/tree1.png'
 
-function PauseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 10 10" {...props}>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M1.496 0a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H2.68a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5H1.496Zm5.82 0a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H8.5a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5H7.316Z"
-      />
-    </svg>
-  )
-}
+export default function Home() {
+  const [stage, setStage] = useState('');
+  const [exp, setExp] = useState('');
+  const [userId, setUserId] = useState('');
 
-function PlayIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 10 10" {...props}>
-      <path d="M8.25 4.567a.5.5 0 0 1 0 .866l-7.5 4.33A.5.5 0 0 1 0 9.33V.67A.5.5 0 0 1 .75.237l7.5 4.33Z" />
-    </svg>
-  )
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/plant/1');
+        console.log('API Response:', response.data[0]); // Assuming the response is an array and you're interested in the first item
+        const data = response.data[0]; // Adjust according to actual response structure
 
-function EpisodeEntry({ episode }: { episode: Episode }) {
-  let date = new Date(episode.published)
+        setStage(data.stage);
+        setExp(data.exp);
+        setUserId(data.userId);
+      } catch (error) {
+        console.error('API Error:', error);
+      }
+    };
 
-  return (
-    <article
-      aria-labelledby={`episode-${episode.id}-title`}
-      className="py-10 sm:py-12"
-    >
-      <Container>
-        <div className="flex flex-col items-start">
-          <h2
-            id={`episode-${episode.id}-title`}
-            className="mt-2 text-lg font-bold text-slate-900"
-          >
-            <Link href={`episodes/${episode.id}`}>{episode.title}</Link>
-          </h2>
-          <FormattedDate
-            date={date}
-            className="order-first font-mono text-sm leading-7 text-slate-500"
-          />
-          <p className="mt-1 text-base leading-7 text-slate-700">
-            {episode.description}
-          </p>
-          <div className="mt-4 flex items-center gap-4">
-            <EpisodePlayButton
-              episode={episode}
-              className="flex items-center gap-x-3 text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900"
-              playing={
-                <>
-                  <PauseIcon className="h-2.5 w-2.5 fill-current" />
-                  <span aria-hidden="true">Reflect</span>
-                </>
-              }
-              paused={
-                <>
-                  <PlayIcon className="h-2.5 w-2.5 fill-current" />
-                  <span aria-hidden="true">Reflect</span>
-                </>
-              }
-            />
-            <span
-              aria-hidden="true"
-              className="text-sm font-bold text-slate-400"
-            >
-              /
-            </span>
-            <Link
-              href={`/${episode.id}`}
-              className="flex items-center text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900"
-              aria-label={`Show notes for episode ${episode.title}`}
-            >
-              Show notes
-            </Link>
-          </div>
-        </div>
-      </Container>
-    </article>
-  )
-}
+    fetchData();
+  }, []);
 
-export default async function Home() {
-  let episodes = await getAllEpisodes()
+  // Function to determine which tree image to display
+  const getImageForStage = (stage) => {
+    switch(stage) {
+      case 'Seedling':
+        return seedlingImage;
+      case 'Sapling':
+        return saplingImage;
+      case 'Mid':
+        return midImage;
+      case 'Mature':
+        return matureImage;
+      case 'Old':
+        return oldImage;
+      default:
+        return seedlingImage; // Default image if stage is unknown
+    }
+  };
 
   return (
-    <div className="pb-6 pt-6 sm:pb-4 lg:pt-12">
-      <Image src= {tree1} alt = "" />
-
-      <Container>
-        {/* Profile Picture */}
-        <div className=" flex items-center gap-4">
-            <img className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg" alt="" />
-            <div className="font-medium dark:text-white">
-                <div className="font-semibold">Jese Leos</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">155 XP</div>
-            </div>
-        </div>
-
-        {/* <h1 className="text-2xl font-bold leading-7 text-slate-900">
-          Quests
-        </h1> */}
-      </Container>
-
-
-
-      <div className="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
-        {episodes.map((episode) => (
-          <EpisodeEntry key={episode.id} episode={episode} />
-        ))}
+    <div className="flex flex-col justify-center items-center min-h-screen">
+      {/* Displaying Stage and Exp */}
+      <div className="text-center mb-4">
+        <p className="text-lg font-semibold">Stage: {stage}</p>
+        <p className="text-lg font-semibold">Exp: {exp}</p>
+      </div>
+      {/* Wrap Image in a div and apply the animation class */}
+      <div className="breathing-animation">
+        <Image src={getImageForStage(stage)} alt="Tree" layout="fixed" />
       </div>
     </div>
-  )
+  );
 }
-
-export const revalidate = 10
