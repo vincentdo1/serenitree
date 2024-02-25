@@ -61,7 +61,7 @@ export default function Home() {
       {/* Wrap Image in a div and apply the animation class */}
       <div className="breathing-animation">
         <Image src={getImageForStage(stage)} alt="Tree" layout="fixed" />
-      </div>
+        </div>
     </div>
   );
 }
