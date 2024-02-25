@@ -1,15 +1,15 @@
 import { relations } from 'drizzle-orm'
-import { boolean, numeric, text, pgTable, timestamp, integer } from "drizzle-orm/pg-core";
+import { boolean, numeric, text, pgTable, timestamp, integer, serial } from "drizzle-orm/pg-core";
 
 export const user = pgTable('users', {
-    id: integer('id')
+    id: serial('id')
         .primaryKey(),
     username: text('username').notNull(),
     password: text('password').notNull(),
 })
 
 export const quest = pgTable('quest', {
-    id: integer('id')
+    id: serial('id')
         .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
@@ -18,11 +18,12 @@ export const quest = pgTable('quest', {
     completed: boolean('completed').default(false),
     difficulty: text('difficulty'),
     category: text('category'),
-    userId: integer("user_id").references(() => user.id)
-})
+    userId: integer("user_id")
+        .references(() => user.id) 
+});
 
 export const plant = pgTable('plant', {
-    id: integer('id')
+    id: serial('id')
         .primaryKey(),
     stage: text('stage').notNull(),
     exp: numeric('exp').notNull(),
@@ -30,7 +31,7 @@ export const plant = pgTable('plant', {
 })
 
 export const spell = pgTable('spell', {
-    id: integer('id')
+    id: serial('id')
         .primaryKey(),
     name: text('name').notNull(),
     description: text('description').notNull(),
@@ -39,7 +40,7 @@ export const spell = pgTable('spell', {
 })
 
 export const reflection = pgTable('reflection', {
-    id: integer('id')
+    id: serial('id')
         .primaryKey(),
     date: timestamp('date', { withTimezone: true }).notNull().defaultNow(),
     message: text('message').notNull(),
