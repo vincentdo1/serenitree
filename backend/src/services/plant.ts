@@ -1,31 +1,20 @@
 import { Hono } from 'hono'
-import { SQL, eq, inArray } from 'drizzle-orm'
-import { drizzle } from "drizzle-orm/postgres-js";
-import { migrate } from "drizzle-orm/postgres-js/migrator";
-import postgres from "postgres";
-import { plant } from '../schema';
-import connectDB from '../utils/connectDB';
+import { eq } from 'drizzle-orm'
+import { db } from '../db'
+import { plants } from '../schema'
+import { summarizeProgress } from '../lib/leveling'
+import { requireAuth } from '../middleware/auth'
+import type { AppEnv } from '../types'
 
-const app = new Hono()
+const app = new Hono<AppEnv>()
+app.use('*', requireAuth)
 
-app.get('/:userId', connectDB, async (c) => {
-  // Changed to userId
-  const param = c.req.param('userId')
-  console.log(param)
-  return c.json(await c.get('db').select().from(plant).where(eq(plant.userId, param)).execute());
-});
-
-app.post('/:userId', connectDB, async (c) => {
-  const body = await c.req.json()
-  console.log(body)
-  return c.json(await c.get('db').insert(plant).values({...body}).returning());
-});
-
-app.put('/:userId', connectDB, async (c) => {
-  const param = c.req.param('userId')
-  const body = await c.req.json()
-  console.log(body)
-  return c.json(await c.get('db').update(plant).set({ ...body}).where(eq(plant.userId, param)).returning());
-});
+// The plant's growth is always derived from its XP — no client ever writes the
+// stage directly (the original code did, with broken thresholds).
+app.get('/', async (c) => {
+  const userId = c.get('userId')
+  const [plant] = await db.select().from(plants).where(eq(plants.userId, userId)).limit(1)
+  return c.json(summarizeProgress(plant?.exp ?? 0))
+})
 
 export default app

@@ -128,3 +128,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# OS / editor
+.DS_Store
+
+# Local Claude Code settings (machine-specific permissions, preview config)
+.claude/
+
+# PGlite fallback database
+**/.pglite/
+*.pglite

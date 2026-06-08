@@ -1,26 +1,18 @@
 import Link from 'next/link'
-
-import { Waveform } from '@/components/Waveform'
+import { Logo } from '@/components/Logo'
 
 export default function NotFound() {
   return (
-    <main className="relative flex h-full items-center py-36 lg:px-8">
-      <Waveform className="absolute left-0 top-0 h-20 w-full" />
-      <div className="relative mx-auto flex w-full max-w-2xl flex-col items-center px-4 sm:px-6 lg:px-0">
-        <p className="font-mono text-sm leading-7 text-slate-500">404</p>
-        <h1 className="mt-4 text-lg font-bold text-slate-900">
-          Page not found
-        </h1>
-        <p className="mt-2 text-base leading-7 text-slate-700">
-          Sorry, we couldn’t find the page you’re looking for.
-        </p>
-        <Link
-          href="/"
-          className="mt-4 text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900"
-        >
-          Go back home
-        </Link>
-      </div>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-5 bg-cream px-4 text-center">
+      <Logo />
+      <p className="font-display text-6xl font-semibold text-forest-300">404</p>
+      <h1 className="text-xl font-semibold text-forest-900">This path leads nowhere</h1>
+      <p className="max-w-sm text-bark-500">
+        The page you’re looking for has wandered off into the forest.
+      </p>
+      <Link href="/" className="btn-primary">
+        Back to safety
+      </Link>
     </main>
   )
 }
