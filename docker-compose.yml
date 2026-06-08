@@ -1,0 +1,24 @@
+# Local Postgres for Serenitree.
+# Usage:  docker compose up -d
+# The backend connects via DATABASE_URL (see backend/.env.example).
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: serenitree-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: serenitree
+      POSTGRES_PASSWORD: serenitree
+      POSTGRES_DB: serenitree
+    ports:
+      - "5432:5432"
+    volumes:
+      - serenitree-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U serenitree -d serenitree"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  serenitree-pgdata:
