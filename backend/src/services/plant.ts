@@ -9,8 +9,7 @@ import type { AppEnv } from '../types'
 const app = new Hono<AppEnv>()
 app.use('*', requireAuth)
 
-// The plant's growth is always derived from its XP — no client ever writes the
-// stage directly (the original code did, with broken thresholds).
+// Tree stage is derived from XP; the client never writes it directly.
 app.get('/', async (c) => {
   const userId = c.get('userId')
   const [plant] = await db.select().from(plants).where(eq(plants.userId, userId)).limit(1)

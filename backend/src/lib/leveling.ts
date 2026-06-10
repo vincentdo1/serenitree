@@ -1,5 +1,4 @@
-// Single source of truth for XP, levels, and tree growth. Unit tested in
-// leveling.test.ts. (The original frontend stage logic was unreachable.)
+// XP, levels, and tree-stage math. Unit tested in leveling.test.ts.
 
 export const STAGES = ['seedling', 'sapling', 'blooming', 'mature', 'ancient'] as const
 export type Stage = (typeof STAGES)[number]

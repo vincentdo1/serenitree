@@ -102,8 +102,8 @@ app.delete('/:id', async (c) => {
   return c.body(null, 204)
 })
 
-// Complete a quest and grow the tree. The `completed = false` guard makes this
-// concurrency-safe — only the request that flips the row awards XP.
+// Complete a quest and award XP. The completed=false guard prevents
+// double-awarding if two requests race.
 app.post('/:id/complete', async (c) => {
   const userId = c.get('userId')
   const existing = await getOwnedQuest(userId, c.req.param('id'))

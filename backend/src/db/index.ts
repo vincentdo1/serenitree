@@ -15,9 +15,8 @@ const MIGRATIONS_FOLDER = join(process.cwd(), 'drizzle')
 let migrateFn: () => Promise<void>
 let closeFn: () => Promise<void>
 
-// One shared connection per process (the original opened one per request and
-// never closed it). DATABASE_URL set -> Postgres; blank -> in-process PGlite.
-// Both speak the same dialect, so schema and migrations are shared.
+// One shared connection per process. DATABASE_URL set -> Postgres; blank ->
+// in-process PGlite. Both speak the same dialect, so schema/migrations are shared.
 function createDb(): DB {
   if (env.DATABASE_URL) {
     const client = postgres(env.DATABASE_URL, { max: 10 })

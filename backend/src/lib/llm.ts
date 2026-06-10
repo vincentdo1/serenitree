@@ -1,13 +1,5 @@
-/**
- * Pluggable LLM provider — a skeleton for a future feature, not wired into
- * production. One small interface, three implementations (Anthropic, OpenAI,
- * stub), selected from the environment. Both real providers call the vendor's
- * HTTP API directly, so there is no SDK dependency to ship. To add a provider,
- * implement `complete` and add a branch in `resolveProvider`.
- *
- * `llm.enabled` is false when no key is set, so callers fall back to deterministic
- * local content (see services/insights.ts) and the app works with zero setup.
- */
+// Optional LLM provider, selected from env (LLM_PROVIDER + API keys). When no key
+// is set, `enabled` is false and callers fall back to local content.
 import { env } from '../env'
 
 export interface CompletionInput {

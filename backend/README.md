@@ -28,11 +28,10 @@ real Postgres (e.g. `docker compose up -d` from the repo root).
 
 ## Migrations
 
-The schema in `drizzle/` is a **fresh, single migration** for the rebuilt data model — it
-intentionally replaces the original hackathon schema (which used different tables/columns).
-There is no in-place upgrade path from the old schema; treat this as a clean start. For a
-real deployment, point `DATABASE_URL` at an empty database and run `npm run migrate`. Future
-schema changes should be additive: edit `schema.ts`, run `npm run generate`, then `migrate`.
+The `drizzle/` folder holds a single migration for the current schema. There is no upgrade
+path from any earlier schema — start from an empty database. For a deployment, point
+`DATABASE_URL` at an empty Postgres and run `npm run migrate`. Future changes should be
+additive: edit `schema.ts`, run `npm run generate`, then `migrate`.
 
 ## API
 

@@ -70,9 +70,7 @@ describe('summarizeProgress', () => {
     expect(p.progress).toBeCloseTo(0.25)
   })
 
-  it('regression: high XP keeps advancing the stage (old code capped at sapling)', () => {
-    // The original frontend could only ever reach "Sapling" because its
-    // if/else thresholds were unreachable. Make sure XP keeps growing the tree.
+  it('keeps advancing the stage as XP grows', () => {
     expect(summarizeProgress(1000).stage).toBe('blooming')
     expect(summarizeProgress(1000).level).toBe(5)
     expect(summarizeProgress(5000).stage).toBe('ancient')

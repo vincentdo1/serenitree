@@ -21,8 +21,8 @@ const FEATURES = [
   },
   {
     icon: IconSparkles,
-    title: 'AI-assisted',
-    body: 'Optional AI helps suggest quests, spark reflections, and summarize your week.',
+    title: 'Weekly recap',
+    body: 'See what you accomplished each week and celebrate the progress you made.',
   },
 ]
 

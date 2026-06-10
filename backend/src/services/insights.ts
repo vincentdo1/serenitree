@@ -1,5 +1,4 @@
-// AI-assisted endpoints (skeleton for a future feature). Each works without an
-// API key by falling back to deterministic local content, so the UI never breaks.
+// Endpoints backed by the optional LLM provider, with local fallbacks when it's off.
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
