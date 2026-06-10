@@ -1,30 +1,185 @@
-# Serenitree
-A fantasy-themed platform for self-reflection and goal tracking built by Vincent Do, Sengdao Inthavong, Richard Yang, and Sreyansh Mamidi at HackIllinois 2024.
+# 🌳 Serenitree
 
-## Inspiration
+A full-stack, fantasy-themed self-growth app. Turn your goals into **quests**, defeat
+monsters to earn XP, reflect on your week, and watch a **magical tree grow** through five
+living stages as you make progress.
 
-Our inspiration for Serenitree sprang from a simple, yet profound realization: personal growth and goal achievement are akin to nurturing a living organism. We envisioned a platform where users could visualize their progress and achievements as the growth of a magical tree, making the journey towards personal goals both visually rewarding and emotionally engaging. This concept aims to motivate users by providing them with a serene and immersive environment to reflect on their achievements and learn from their experiences.
+It started as a **HackIllinois 2024** hackathon project and grew into a complete full-stack
+app: real authentication, a typed API with a tested domain model, and a responsive UI.
 
-## What it does
+---
 
-Serenitree is a fantasy-themed mobile application that allows users to set personal goals and track their completion. Each goal is represented as a quest for the user's magical tree, which grows and thrives as tasks are accomplished. At the end of each week, users reflect on their progress, marking goals as completed or pending, and write a short reflection on their experiences. This process not only promotes accountability, but also encourages users to celebrate their victories and learn from challenges.
+## ✨ Features
 
-## How we built it
+- **Quests** — create goals and pick a difficulty (a "monster" to defeat): 🫧 Slime,
+  👺 Goblin, 🧙 Witch, or 🐉 Dragon. Harder monsters award more XP.
+- **A living tree** — every completed quest grows your tree through five stages
+  (seedling → sapling → blooming → mature → ancient), driven entirely by server-side XP.
+- **Levels & progress** — a transparent XP curve with per-level progress bars.
+- **Reflections** — journal what you did and how it felt, per-quest or free-form.
+- **Weekly recap** — a celebratory summary of your last seven days.
+- **Quest ideas & prompts** — get suggested quests and reflection prompts (generated
+  locally by default, or via Claude/OpenAI if a key is configured).
+- **Real auth** — register/login with hashed passwords and JWTs; every user's data is
+  isolated.
 
-Serenitree was brought to life using a modern tech stack that includes TypeScript, React, and Hono.js for serverless functions, Next.js for server-side rendering, Tailwind CSS for styling, Postman for API testing, GitHub for version control, JavaScript and Node.js for the backend, PostgreSQL for our database, and AWS for hosting. This combination allowed us to create a responsive, user-friendly interface, as well as a scalable backend infrastructure capable of handling user data securely and efficiently.
+---
 
-## Challenges we ran into
+## 🧱 Tech stack
 
-Integrating the diverse set of technologies was our primary challenge, especially ensuring seamless communication between the frontend, the backend, and the database. Additionally, implementing the tree growth animation to reflect real-time user progress required creative coding solutions and optimizations to ensure smooth performance across devices.
+| Layer        | Tech                                                                    |
+| ------------ | ----------------------------------------------------------------------- |
+| **Frontend** | Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS             |
+| **Backend**  | Hono.js, TypeScript, Drizzle ORM, Zod, JWT (`hono/jwt`), bcrypt         |
+| **Database** | PostgreSQL (Docker / managed) — with a zero-setup PGlite fallback       |
+| **AI**       | Optional LLM provider (Claude / OpenAI over HTTP) — off by default       |
+| **Tests**    | Vitest (unit + full API integration tests on an in-process database)    |
 
-## Accomplishments that we're proud of
+---
 
-We are proud of developing a fully functional prototype within the limited timeframe, which not only meets our initial vision but also provides a solid foundation for future enhancements. The user interface is intuitive and visually appealing, thanks to Tailwind CSS and React. Our backend, built with Node.js and PostgreSQL, efficiently manages user data, ensuring a smooth and secure user experience. The magical tree animation, which grows with user achievements, stands as a testament to our team's creativity and technical skills.
+## 🗂️ Architecture
 
-## What we learned
+```
+serenitree/
+├── backend/          Hono API — auth, quests, plant, reflections, AI insights
+│   └── src/
+│       ├── app.ts            route wiring (testable, no server)
+│       ├── index.ts          server entry (migrate + serve)
+│       ├── schema.ts         Drizzle schema (users, plants, quests, reflections)
+│       ├── db/               singleton connection (Postgres or PGlite) + seed
+│       ├── lib/              leveling math, auth helpers, pluggable LLM
+│       ├── middleware/       JWT auth guard
+│       └── services/         one Hono sub-app per resource
+├── frontend/         Next.js app — landing, auth, dashboard, quests, tree, reflect, recap
+│   └── src/
+│       ├── app/              routes ((app) shell + public landing/login)
+│       ├── components/       UI kit + AuthProvider + AppShell
+│       └── lib/              typed API client, types, game metadata
+└── docker-compose.yml        local Postgres
+```
 
-This project was a tremendous learning opportunity for our team. We gained hands-on experience integrating various technologies and frameworks, deepening our understanding of full-stack development. Working under time constraints honed our problem-solving skills and taught us the importance of effective communication and teamwork. Additionally, we learned about the psychological aspects of gamification and its potential to motivate and engage users.
+The frontend talks to the backend over a typed `fetch` client; auth is a JWT sent as a
+`Bearer` token. **All game logic (XP, levels, tree stage) lives on the server** as a single
+source of truth — the client only renders it.
 
-## What's next for Serenitree
+---
 
-Looking forward, we plan to enrich Serenitree with more features, such as social elements that allow users to share their trees and achievements with friends, enhancing motivation through community support. We aim to implement AI-driven insights to offer personalized goal-setting advice and motivational tips. Expanding the ecosystem with more themes, quests, and rewards will make the user experience even more engaging. Ultimately, our vision is to see Serenitree evolve into a platform that not only helps users achieve their goals, but also fosters a community of growth and support.
+## 🚀 Quick start
+
+**Prerequisites:** Node.js 20+.
+
+### 1. Backend
+
+```bash
+cd backend
+npm install
+cp .env.example .env        # then edit if you like
+```
+
+You have two database options:
+
+- **Zero setup (recommended to just try it):** leave `DATABASE_URL` blank in `.env`. The
+  backend runs against an in-process **PGlite** database (a WASM build of Postgres) — no
+  Docker, no install.
+- **Docker Postgres (production-parity):** from the repo root run `docker compose up -d`,
+  then set `DATABASE_URL=postgres://serenitree:serenitree@localhost:5432/serenitree` in
+  `backend/.env`.
+
+Then:
+
+```bash
+npm run seed        # optional: creates a demo account (demo / serenitree123)
+npm run dev         # API on http://localhost:3000
+```
+
+### 2. Frontend
+
+```bash
+cd frontend
+npm install
+cp .env.example .env.local   # NEXT_PUBLIC_API_URL=http://localhost:3000
+npm run dev                  # app on http://localhost:4000
+```
+
+Open **http://localhost:4000** and sign in with the demo account, or create your own.
+
+---
+
+## 🔐 Environment variables (backend)
+
+| Variable            | Default                        | Notes                                              |
+| ------------------- | ------------------------------ | -------------------------------------------------- |
+| `PORT`              | `3000`                         | API port                                           |
+| `CORS_ORIGIN`       | `http://localhost:4000`        | Comma-separated allowed origins                    |
+| `DATABASE_URL`      | _(blank → PGlite)_             | Postgres connection string for real DB             |
+| `PGLITE_PATH`       | `./.pglite`                    | Where the fallback DB persists                     |
+| `JWT_SECRET`        | `dev-insecure-secret-change-me`| **Required to change in production**               |
+| `JWT_TTL_SECONDS`   | `604800` (7 days)              | Token lifetime                                     |
+| `LLM_PROVIDER`      | `auto`                         | `auto` \| `anthropic` \| `openai` \| `stub`        |
+| `ANTHROPIC_API_KEY` | —                              | Enables Claude                                     |
+| `ANTHROPIC_MODEL`   | `claude-haiku-4-5`             | Cheapest Claude tier                               |
+| `OPENAI_API_KEY`    | —                              | Enables OpenAI                                     |
+| `OPENAI_MODEL`      | `gpt-4o-mini`                  | Cheapest OpenAI tier                               |
+
+The frontend uses a single variable: `NEXT_PUBLIC_API_URL`.
+
+---
+
+## LLM integration (optional)
+
+Quest ideas, reflection prompts, and the weekly recap can optionally be generated by an LLM.
+It is off by default and uses built-in local fallbacks, so the app works with no key.
+
+Providers live behind one interface in [`backend/src/lib/llm.ts`](backend/src/lib/llm.ts)
+(`anthropic`, `openai`, `stub`), selected via env. Both real providers call the vendor HTTP
+API directly — no SDK dependency.
+
+**To enable:** set `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` in `backend/.env` (optionally set
+`LLM_PROVIDER` and the model). Without a key, these endpoints return deterministic local
+content and the UI marks it as a sample.
+
+---
+
+## ✅ Testing
+
+```bash
+cd backend
+npm test          # unit tests for the leveling/XP math + full API integration tests
+npm run typecheck # strict TypeScript, no emit
+```
+
+The API tests spin up the **real Hono app against an in-memory PGlite database** and
+exercise registration, auth, quest completion → XP → tree growth (incl. idempotency),
+ownership checks, reflections, and the AI fallbacks.
+
+```bash
+cd frontend
+npm run typecheck
+npm run build     # full production build
+```
+
+---
+
+## 🏭 Notes for production
+
+This runs fine as a local app. If you harden it for production:
+
+- Set a strong `JWT_SECRET` (the server refuses to boot in production with the default).
+- Point `DATABASE_URL` at a managed Postgres (Neon, Supabase, RDS, …) and run
+  `npm run migrate`.
+- Tokens are stored client-side and sent as `Bearer` headers — fine for a demo; for a
+  hardened deployment, move to httpOnly, `Secure`, `SameSite` cookies.
+- Restrict `CORS_ORIGIN` to your real frontend origin(s).
+- **Dependency advisories:** the backend is clean (`npm audit` → 0). The frontend's
+  `npm audit` still reports Next.js advisories — these are all **self-hosted SSR** issues
+  (Image Optimizer, middleware/proxy/rewrites/i18n, RSC cache poisoning) that this app
+  doesn't use, and the only "fix" npm offers is a major upgrade to Next 16. Staying on the
+  latest Next 14.2.x is the right call for a demo; revisit if you self-host with those
+  features.
+
+---
+
+## 👥 Credits
+
+Created by Vincent Do, Sengdao Inthavong, Richard Yang, and Sreyansh Mamidi at
+**HackIllinois 2024**.

@@ -1,84 +1,84 @@
 import { relations } from 'drizzle-orm'
 import { createId } from '@paralleldrive/cuid2'
-import { boolean, numeric, text, pgTable, timestamp, integer, serial } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 
-export const user = pgTable('users', {
-    id: text('id')
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    username: text('username').notNull(),
-    password: text('password').notNull(),
+const id = () =>
+  text('id')
+    .$defaultFn(() => createId())
+    .primaryKey()
+
+const createdAt = () =>
+  timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull().defaultNow()
+
+export const users = pgTable('users', {
+  id: id(),
+  username: text('username').notNull().unique(),
+  email: text('email').notNull().unique(),
+  passwordHash: text('password_hash').notNull(),
+  createdAt: createdAt(),
 })
 
-export const quest = pgTable('quest', {
-    id: text('id')
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    name: text('name').notNull(),
-    description: text('description').notNull(),
-    createDate: timestamp('create_date', { withTimezone: true }).notNull().defaultNow(),
-    endDate: timestamp('end_date', { withTimezone: true }).notNull(),
-    completed: boolean('completed').default(false),
-    difficulty: text('difficulty'),
-    category: text('category'),
-    userId: text("user_id")
-        .references(() => user.id) 
-});
-
-export const plant = pgTable('plant', {
-    id: text('id')
-      .$defaultFn(() => createId())
-      .primaryKey(),
-    stage: text('stage').notNull(),
-    exp: numeric('exp').notNull(),
-    userId: text("user_id").references(() => user.id).unique()
+export const plants = pgTable('plants', {
+  id: id(),
+  userId: text('user_id')
+    .notNull()
+    .unique()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  stage: text('stage').notNull().default('seedling'),
+  exp: integer('exp').notNull().default(0),
+  createdAt: createdAt(),
+  updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' })
+    .notNull()
+    .defaultNow(),
 })
 
-export const spell = pgTable('spell', {
-    id: text('id')
-        .$defaultFn(() => createId())
-        .primaryKey(),
-    name: text('name').notNull(),
-    description: text('description').notNull(),
-    exp: numeric('exp').notNull(),
-    questId: text("quest_id").references(() => quest.id)
+export const quests = pgTable('quests', {
+  id: id(),
+  userId: text('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  title: text('title').notNull(),
+  description: text('description').notNull().default(''),
+  category: text('category'),
+  difficulty: text('difficulty').notNull().default('Slime'),
+  xpReward: integer('xp_reward').notNull().default(10),
+  completed: boolean('completed').notNull().default(false),
+  completedAt: timestamp('completed_at', { withTimezone: true, mode: 'date' }),
+  dueDate: timestamp('due_date', { withTimezone: true, mode: 'date' }),
+  createdAt: createdAt(),
 })
 
-export const reflection = pgTable('reflection', {
-    id: text('id')
-        .$defaultFn(() => createId())
-        .primaryKey(),
-    date: timestamp('date', { withTimezone: true }).notNull().defaultNow(),
-    message: text('message').notNull(),
-    questId: text("quest_id").references(() => quest.id)
+export const reflections = pgTable('reflections', {
+  id: id(),
+  userId: text('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  questId: text('quest_id').references(() => quests.id, { onDelete: 'set null' }),
+  message: text('message').notNull(),
+  createdAt: createdAt(),
 })
 
-export const userRelation = relations(user, ({ one, many}) => ({
-    quest: many(quest),
-    plant: one(plant, {
-        fields: [user.id],
-        references: [plant.id],
-      }),
+export const usersRelations = relations(users, ({ one, many }) => ({
+  plant: one(plants, { fields: [users.id], references: [plants.userId] }),
+  quests: many(quests),
+  reflections: many(reflections),
 }))
 
-export const spellRelation = relations(spell, ({ one }) => ({
-    quest: one(quest),
+export const plantsRelations = relations(plants, ({ one }) => ({
+  user: one(users, { fields: [plants.userId], references: [users.id] }),
 }))
 
-export const plantRelation = relations(plant, ({ one }) => ({
-    user: one(user),
+export const questsRelations = relations(quests, ({ one, many }) => ({
+  user: one(users, { fields: [quests.userId], references: [users.id] }),
+  reflections: many(reflections),
 }))
 
-export const questRelation = relations(quest, ({ one, many }) => ({
-    user: many(user),
-    reflect: many(reflection),
-    // one to one
-    spell: one(spell)
+export const reflectionsRelations = relations(reflections, ({ one }) => ({
+  user: one(users, { fields: [reflections.userId], references: [users.id] }),
+  quest: one(quests, { fields: [reflections.questId], references: [quests.id] }),
 }))
 
-export const reflectionRelation = relations(reflection, ({ one }) => ({
-    quest: one(quest, {
-        fields: [reflection.id],
-        references: [quest.id],
-      }),
-}))
+export type User = typeof users.$inferSelect
+export type Plant = typeof plants.$inferSelect
+export type Quest = typeof quests.$inferSelect
+export type Reflection = typeof reflections.$inferSelect

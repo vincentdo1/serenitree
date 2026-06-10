@@ -1,34 +1,32 @@
-# Transmit
+# Serenitree — Frontend
 
-Transmit is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+Next.js 14 (App Router) + Tailwind CSS. See the [root README](../README.md) for the full
+picture.
 
-## Getting started
-
-To get started with this template, first install the npm dependencies:
+## Run
 
 ```bash
 npm install
+cp .env.example .env.local   # NEXT_PUBLIC_API_URL=http://localhost:3000
+npm run dev                  # http://localhost:4000
 ```
 
-Next, run the development server:
+The backend must be running (default `http://localhost:3000`).
 
-```bash
-npm run dev
-```
+## Scripts
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+| Script              | Description                  |
+| ------------------- | --------------------------- |
+| `npm run dev`       | Dev server on port 4000     |
+| `npm run build`     | Production build            |
+| `npm start`         | Serve the production build  |
+| `npm run lint`      | ESLint                      |
+| `npm run typecheck` | `tsc --noEmit`              |
 
-## Customizing
+## Structure
 
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
-
-## License
-
-This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
-
-## Learn more
-
-To learn more about the technologies used in this site template, see the following resources:
-
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
+- `src/app` — routes. Public **landing** (`/`) and **login** (`/login`); the authenticated
+  app lives in the `(app)` route group (`/dashboard`, `/quests`, `/tree`, `/reflect`,
+  `/recap`) behind an auth guard.
+- `src/components` — UI kit, `AuthProvider` (JWT + user state), and `AppShell` (nav).
+- `src/lib` — typed `api` client, shared `types`, and game metadata (stages, difficulties).
